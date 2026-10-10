@@ -538,8 +538,8 @@ section{border-top:0}
     <div class="contact">
       <div>
         <span class="label">Contact</span>
-        <h2 style="margin-top:12px">Building an Android or payments product? Send me your requirements.</h2>
-        <p>Hiring for a role or need an app built? Tell me what you need and I'll reply by email, usually within a day.</p>
+        <h2 style="margin-top:12px">Building something in Android or payments? Let's talk.</h2>
+        <p>Tell me a little about what you're working on and I'll reply by email, usually within a day.</p>
         <div class="direct">
           <span>Or email me directly</span>
           <div class="mailrow"><code id="mailAddr">ranashivam338@gmail.com</code><button type="button" id="copyMail" class="copy">Copy</button></div>
@@ -548,7 +548,7 @@ section{border-top:0}
       </div>
       <form id="reqForm" class="reqform" novalidate>
         <input type="hidden" name="access_key" value="77585ff2-b6f2-454e-84a0-1835677c49f1">
-        <input type="hidden" name="subject" value="New requirement from your portfolio">
+        <input type="hidden" name="subject" value="New message from your portfolio">
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="two">
           <label for="f-name">Your name<input id="f-name" name="name" required autocomplete="name"></label>
@@ -556,10 +556,10 @@ section{border-top:0}
         </div>
         <div class="two">
           <label for="f-company">Company <em>(optional)</em><input id="f-company" name="company" autocomplete="organization"></label>
-          <label for="f-type">I'm looking for<select id="f-type" name="type"><option>Full-time Android role</option><option>Freelance / contract app</option><option>POS or payments integration</option><option>Something else</option></select></label>
+          <label for="f-type">Topic<select id="f-type" name="type"><option>Project discussion</option><option>Job opportunity</option><option>Collaboration</option><option>Something else</option></select></label>
         </div>
-        <label for="f-msg">Requirements<textarea id="f-msg" name="message" rows="5" required placeholder="What do you need built, timeline, budget or role details"></textarea></label>
-        <button type="submit" class="btn send" id="sendBtn">Send requirements</button>
+        <label for="f-msg">Message<textarea id="f-msg" name="message" rows="5" required placeholder="What you're working on, and how I can help"></textarea></label>
+        <button type="submit" class="btn send" id="sendBtn">Send message</button>
         <p class="formmsg" id="formMsg" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -589,15 +589,15 @@ section{border-top:0}
   function say(t,c){msg.textContent=t;msg.className='formmsg'+(c?' '+c:'');}
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    if(!f.checkValidity()){say('Please fill in your name, a valid email and your requirements.','err');return;}
+    if(!f.checkValidity()){say('Please fill in your name, a valid email and a message.','err');return;}
     var key=f.access_key.value;
     if(!key||key.indexOf('YOUR_')===0){say('The form isn\'t connected yet. Please email me at ranashivam338@gmail.com instead.','err');return;}
     send.disabled=true;send.textContent='Sending…';say('');
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
       .then(function(r){return r.json();})
-      .then(function(j){if(j&&j.success){f.reset();say('Thanks! Your requirements were sent. I\'ll reply by email soon.','ok');}else{throw new Error();}})
+      .then(function(j){if(j&&j.success){f.reset();say('Thanks! Your message was sent. I\'ll reply by email soon.','ok');}else{throw new Error();}})
       .catch(function(){say('Sending failed. Please email me at ranashivam338@gmail.com instead.','err');})
-      .then(function(){send.disabled=false;send.textContent='Send requirements';});
+      .then(function(){send.disabled=false;send.textContent='Send message';});
   });
 })();
 </script>
