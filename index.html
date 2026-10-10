@@ -1,0 +1,584 @@
+<title>Shivam Rana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: sticky slim nav; hero = thesis + receipt card; apps shown as alternating rows of CSS phone mockups beside copy. */
+:root{
+  /* Bold & colourful: tangerine → magenta → violet signature gradient, per-app colour stories */
+  --bg:#fbf8ff; --surface:#ffffff; --surface-2:#f4effc; --ink:#1a1033; --muted:#5d5475; --line:#e4dcf2;
+  --tangerine:#ff5a1f; --magenta:#e8197a; --violet:#6a35ff; --teal:#00a896; --sun:#ffb300; --sky:#1f7aff;
+  --accent:#d6146f; --accent-ink:#ffffff; --accent-soft:#fde3ef; --signal:#6a35ff; --signal-soft:#ece5ff;
+  --grad:linear-gradient(100deg,var(--tangerine) 0%,var(--magenta) 48%,var(--violet) 100%);
+  --blob-a:rgba(255,90,31,.22); --blob-b:rgba(232,25,122,.18); --blob-c:rgba(106,53,255,.20);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --shadow:0 28px 56px -30px rgba(60,20,110,.45);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f0a1f; --surface:#1a1330; --surface-2:#221a3d; --ink:#f3eefe; --muted:#b2a8cc; --line:#342a52;
+  --tangerine:#ff7a45; --magenta:#ff3d93; --violet:#8f6bff; --teal:#2fd6c3; --sun:#ffc63d; --sky:#5aa2ff;
+  --accent:#ff4d9d; --accent-ink:#1a0716; --accent-soft:#3d1631; --signal:#a78bff; --signal-soft:#2c2250;
+  --blob-a:rgba(255,122,69,.20); --blob-b:rgba(255,61,147,.18); --blob-c:rgba(143,107,255,.24);
+  --shadow:0 28px 56px -30px rgba(0,0,0,.85); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f0a1f; --surface:#1a1330; --surface-2:#221a3d; --ink:#f3eefe; --muted:#b2a8cc; --line:#342a52;
+  --tangerine:#ff7a45; --magenta:#ff3d93; --violet:#8f6bff; --teal:#2fd6c3; --sun:#ffc63d; --sky:#5aa2ff;
+  --accent:#ff4d9d; --accent-ink:#1a0716; --accent-soft:#3d1631; --signal:#a78bff; --signal-soft:#2c2250;
+  --blob-a:rgba(255,122,69,.20); --blob-b:rgba(255,61,147,.18); --blob-c:rgba(143,107,255,.24);
+  --shadow:0 28px 56px -30px rgba(0,0,0,.85); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);padding-inline:16px;padding-block:0}
+.wrap{max-width:70rem;margin-inline:auto}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08}
+p{margin:0}
+.label{font:600 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px}
+.top .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 18px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;font:700 1.02rem/1 var(--display);color:var(--ink);text-decoration:none}
+.mono{width:32px;height:32px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:800 .9rem/1 var(--display);letter-spacing:.02em}
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;font-size:.95rem}
+.nav a{color:var(--ink);text-decoration:none}
+.nav a:hover{color:var(--accent)}
+.theme{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;font:600 .78rem/1 var(--mono);cursor:pointer}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(44px,7vw,88px) clamp(36px,5vw,56px)}
+.avail{display:inline-flex;align-items:center;gap:8px;font:600 .78rem/1 var(--mono);letter-spacing:.06em;color:var(--accent);background:var(--accent-soft);padding:8px 12px;border-radius:999px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent)}
+.hero h1{margin-top:18px;font-size:clamp(2.4rem,5.6vw,4.2rem);font-weight:800;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{margin-top:20px;max-width:36rem;color:var(--muted);font-size:1.15rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid var(--accent);transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{color:var(--accent)}
+.btn svg{width:16px;height:16px}
+
+/* receipt */
+.receipt{background:var(--surface);font:400 .86rem/1.6 var(--mono);padding:24px 24px 34px;box-shadow:var(--shadow);transform:rotate(1.2deg);
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat,radial-gradient(circle at 7px 0,transparent 6px,#000 6.5px) bottom/14px 10px repeat-x;
+          mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat,radial-gradient(circle at 7px 0,transparent 6px,#000 6.5px) bottom/14px 10px repeat-x}
+.receipt .head{text-align:center;border-bottom:1px dashed var(--line);padding-bottom:12px;margin-bottom:12px}
+.receipt .head b{display:block;font-size:.98rem;letter-spacing:.1em}
+.row{display:flex;justify-content:space-between;gap:12px}
+.row span:first-child{color:var(--muted)}
+.row span:last-child{text-align:right}
+.status{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);text-align:center}
+.status b{display:inline-block;color:var(--accent);font-size:1.2rem;letter-spacing:.16em}
+.status small{display:block;color:var(--muted);font-size:.74rem;margin-top:4px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:clamp(40px,6vw,64px)}
+.stat{padding:20px 22px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font:800 clamp(1.6rem,3vw,2.1rem)/1 var(--display);font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:8px;color:var(--muted);font-size:.92rem;line-height:1.35}
+
+/* sections */
+section{padding-block:clamp(44px,6vw,80px);border-top:1px solid var(--line)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px 24px;margin-bottom:34px}
+.sec-head h2{font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;letter-spacing:-.015em}
+.sec-head p{color:var(--muted);max-width:30rem}
+
+/* app rows */
+.apps{display:grid;gap:clamp(40px,6vw,72px)}
+.app{display:grid;grid-template-columns:minmax(0,17rem) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.app:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,17rem)}
+.app:nth-child(even) .stage{order:2}
+.stage{background:var(--surface-2);border:1px solid var(--line);border-radius:22px;padding:26px 0;display:grid;place-items:center}
+.app-copy .label{color:var(--signal)}
+.app-copy h3{font-size:clamp(1.45rem,2.6vw,1.9rem);font-weight:700;margin-top:10px}
+.app-copy p{color:var(--muted);margin-top:12px;max-width:36rem}
+.feats{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 20px;font-size:.96rem}
+.feats li{display:flex;gap:8px}
+.feats li::before{content:"";flex:none;width:6px;height:6px;margin-top:.6em;border-radius:2px;background:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.tag{font:400 .74rem/1 var(--mono);padding:6px 9px;border-radius:5px;background:var(--accent-soft);color:var(--ink)}
+
+/* phone */
+.phone{width:200px;max-width:100%;aspect-ratio:9/18.5;border-radius:30px;background:#0b0f0e;padding:8px;box-shadow:var(--shadow);position:relative}
+.screen{width:100%;height:100%;border-radius:23px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column;font:400 9.5px/1.35 var(--body);color:var(--ink)}
+.sb{display:flex;justify-content:space-between;padding:7px 14px 4px;font:600 8px/1 var(--mono);color:var(--muted)}
+.bar{padding:8px 12px;font:700 11px/1.2 var(--display);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.bar small{font:400 8px/1 var(--mono);color:var(--muted)}
+.body{flex:1;padding:10px 12px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.m-label{font:600 7.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.amount{font:800 22px/1 var(--display);font-variant-numeric:tabular-nums}
+.tapzone{flex:1;border:1.5px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:8.5px;gap:4px;padding:8px}
+.nfc{width:34px;height:34px;border-radius:50%;border:2px solid var(--accent);display:grid;place-items:center;margin-inline:auto}
+.nfc::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--accent);opacity:.6}
+.paybtns{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.paybtns span{padding:7px 0;text-align:center;border-radius:7px;background:var(--surface-2);border:1px solid var(--line);font-weight:600;font-size:8.5px}
+.paybtns span.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.mapbox{height:92px;border-radius:10px;background:
+  linear-gradient(90deg,transparent 48%,var(--line) 48% 52%,transparent 52%),
+  linear-gradient(0deg,transparent 60%,var(--line) 60% 64%,transparent 64%),
+  linear-gradient(135deg,transparent 30%,var(--line) 30% 33%,transparent 33%),var(--surface-2);position:relative;overflow:hidden}
+.fence{position:absolute;left:38%;top:22%;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.pin{position:absolute;left:calc(38% + 19px);top:calc(22% + 15px);width:10px;height:10px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--signal)}
+.bigbtn{padding:9px;text-align:center;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:9.5px}
+.li{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:8.5px}
+.chip{font:600 7px/1 var(--mono);padding:3px 5px;border-radius:4px;background:var(--accent-soft);color:var(--ink)}
+.chip.warn{background:var(--signal-soft)}
+.bubble{max-width:78%;padding:6px 8px;border-radius:10px;font-size:8.5px}
+.bubble.in{background:var(--surface-2);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:3px}
+.bubble.out{background:var(--accent);color:var(--accent-ink);align-self:flex-end;border-bottom-right-radius:3px}
+.bubble.img{height:46px;width:70%;background:linear-gradient(135deg,var(--accent-soft),var(--signal-soft));border:0}
+.who{font:600 7px/1 var(--mono);color:var(--muted)}
+.composer{margin:0 10px 10px;padding:7px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:8.5px;display:flex;justify-content:space-between}
+.adslot{height:64px;border-radius:9px;background:linear-gradient(120deg,var(--signal-soft),var(--accent-soft));display:flex;flex-direction:column;justify-content:center;padding:8px 10px;gap:3px}
+.adslot b{font:700 10px/1.1 var(--display)}
+.log{font:400 7.5px/1.5 var(--mono);color:var(--muted);background:var(--surface-2);border-radius:8px;padding:6px 8px}
+.log i{font-style:normal;color:var(--accent)}
+
+/* capabilities */
+.caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 40px}
+.cap h3{font-size:1.15rem;font-weight:700;margin-block:10px 8px}
+.cap p{color:var(--muted);font-size:.98rem}
+.cap .de{font:600 .72rem/1 var(--mono);color:var(--signal);letter-spacing:.06em}
+
+/* experience */
+.job{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:24px;padding-block:28px;border-top:1px dashed var(--line)}
+.job:first-child{border-top:0;padding-top:0}
+.when{font:400 .85rem/1.6 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.job h3{font-size:1.3rem;font-weight:700}
+.org{color:var(--muted);margin-top:4px}
+.job ul{margin:12px 0 0;padding-left:1.1rem;max-width:44rem;display:grid;gap:6px}
+.job li::marker{color:var(--accent)}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.skillset{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.skillset ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.skillset li{font-size:.92rem;padding:5px 10px;border-radius:999px;border:1px solid var(--line)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,4vw,44px)}
+.contact h2{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:800}
+.contact p{color:var(--muted);margin-top:12px;max-width:34rem}
+.contact .cta{justify-content:flex-end;margin-top:0}
+footer{padding-block:28px;color:var(--muted);font-size:.85rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+@media (max-width:900px){
+  .hero,.contact{grid-template-columns:minmax(0,1fr)}
+  .contact .cta{justify-content:flex-start}
+  .caps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .receipt{transform:none;max-width:26rem}
+}
+@media (max-width:700px){
+  .app,.app:nth-child(even){grid-template-columns:minmax(0,1fr)}
+  .app:nth-child(even) .stage{order:0}
+}
+@media (max-width:560px){
+  .caps,.skills,.feats{grid-template-columns:minmax(0,1fr)}
+  .job{grid-template-columns:minmax(0,1fr);gap:6px}
+  .nav a.opt{display:none}
+}
+/* ===== Bold & colourful layer ===== */
+.mono{background:var(--grad);color:#fff}
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-40px -16px 0;z-index:-1;pointer-events:none;
+  background:radial-gradient(40% 55% at 12% 30%,var(--blob-a),transparent 70%),
+             radial-gradient(35% 50% at 55% 10%,var(--blob-b),transparent 70%),
+             radial-gradient(45% 60% at 92% 70%,var(--blob-c),transparent 70%)}
+.hero h1{font-size:clamp(2.6rem,6.4vw,4.8rem);letter-spacing:-.035em}
+.hero h1 em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.avail{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+.dot{background:var(--teal)}
+.btn.primary{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 12px 28px -14px var(--magenta)}
+.btn.ghost{color:var(--ink);border-color:var(--line);background:var(--surface)}
+.receipt{border-top:6px solid transparent;border-image:var(--grad) 1}
+.status b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats{border:0;background:transparent;gap:14px}
+.stat{border:0!important;border-radius:16px;color:#fff;padding:22px}
+.stat span{color:rgba(255,255,255,.88)}
+.stat:nth-child(1){background:linear-gradient(135deg,var(--tangerine),#ff8a3d)}
+.stat:nth-child(2){background:linear-gradient(135deg,var(--magenta),#ff5aa5)}
+.stat:nth-child(3){background:linear-gradient(135deg,var(--violet),#9a6bff)}
+.stat:nth-child(4){background:linear-gradient(135deg,#008c7d,var(--teal))}
+.sec-head h2{position:relative;padding-bottom:12px}
+.sec-head h2::after{content:"";position:absolute;left:0;bottom:0;width:56px;height:5px;border-radius:3px;background:var(--grad)}
+section{border-top:0}
+/* per-app colour story: each .app sets --c1/--c2 */
+.app{--accent:var(--c1);--accent-soft:color-mix(in srgb,var(--c1) 16%,var(--surface))}
+.app .stage{border:0;background:linear-gradient(140deg,var(--c1),var(--c2));padding:34px 0;border-radius:26px}
+.app .screen .bigbtn,.app .paybtns span.on{background:var(--c1);color:#fff;border-color:var(--c1)}
+.app .bubble.out{background:var(--c1);color:#fff}
+.app-copy .label{color:var(--c1)}
+.app .tag{background:color-mix(in srgb,var(--c1) 14%,var(--surface));color:var(--ink)}
+.feats li::before{background:var(--c1)}
+.app-pos{--c1:var(--tangerine);--c2:var(--sun)}
+.app-crm{--c1:var(--violet);--c2:var(--sky)}
+.app-chat{--c1:var(--magenta);--c2:var(--tangerine)}
+.app-sdk{--c1:var(--teal);--c2:var(--sky)}
+/* expertise colour chips */
+.cap .de{display:inline-block;padding:6px 9px;border-radius:6px;color:#fff;letter-spacing:.08em}
+.cap:nth-child(6n+1) .de{background:var(--tangerine)}
+.cap:nth-child(6n+2) .de{background:var(--magenta)}
+.cap:nth-child(6n+3) .de{background:var(--violet)}
+.cap:nth-child(6n+4) .de{background:#008c7d}
+.cap:nth-child(6n+5) .de{background:var(--sky)}
+.cap:nth-child(6n+6) .de{background:#c97a00}
+.job li::marker{color:var(--magenta)}
+.skillset{border:0;background:var(--surface);box-shadow:inset 0 4px 0 var(--k,var(--magenta))}
+.skillset:nth-child(1){--k:var(--tangerine)}
+.skillset:nth-child(2){--k:var(--magenta)}
+.skillset:nth-child(3){--k:var(--violet)}
+.skillset:nth-child(4){--k:var(--teal)}
+.contact{border:0;background:var(--grad);color:#fff}
+.contact .label,.contact p{color:rgba(255,255,255,.9)}
+.contact .btn.primary{background:#fff;color:#1a1033;box-shadow:none}
+.theme{background:var(--surface)}
+.contact{align-items:start}
+.direct{margin-top:22px;display:grid;gap:8px;font-size:.95rem}
+.direct>span{color:rgba(255,255,255,.85)}
+.direct a{color:#fff;font-weight:600}
+.mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.mailrow code{font:600 .95rem/1 var(--mono);background:rgba(255,255,255,.16);padding:9px 11px;border-radius:8px;color:#fff;user-select:all;word-break:break-all}
+.copy{border:0;border-radius:8px;padding:9px 12px;background:#fff;color:#1a1033;font:600 .8rem/1 var(--mono);cursor:pointer}
+.reqform{background:var(--surface);color:var(--ink);border-radius:16px;padding:clamp(18px,3vw,26px);display:grid;gap:14px;box-shadow:var(--shadow);min-width:0}
+.reqform .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.reqform label{display:grid;gap:6px;font:600 .82rem/1.2 var(--body);color:var(--ink);min-width:0}
+.reqform label em{font-style:normal;font-weight:400;color:var(--muted)}
+.reqform input,.reqform select,.reqform textarea{width:100%;font:400 .98rem/1.4 var(--body);color:var(--ink);background:var(--surface-2);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+.reqform textarea{resize:vertical}
+.reqform input:focus,.reqform select:focus,.reqform textarea:focus{outline:none;border-color:var(--magenta);box-shadow:0 0 0 3px color-mix(in srgb,var(--magenta) 22%,transparent)}
+.reqform .send{justify-self:start;background:var(--grad);color:#fff;border:0;cursor:pointer;font-size:1rem}
+.reqform .send[disabled]{opacity:.6;cursor:progress}
+.formmsg{font-size:.92rem;color:var(--muted);min-height:1.2em}
+.formmsg.ok{color:#0a8a5a}.formmsg.err{color:var(--accent)}
+.hp{position:absolute;left:-9999px}
+@media (max-width:560px){.reqform .two{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:no-preference){
+  .dot{animation:ping 2.2s ease-out infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}80%,100%{box-shadow:0 0 0 8px transparent}}
+  .phone{transition:transform .3s ease}
+  .app:hover .phone{transform:translateY(-6px) rotate(-1deg)}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mono" aria-hidden="true">SR</span>Shivam Rana</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#apps">Apps</a>
+      <a class="opt" href="#work">Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <button class="theme" id="themeToggle" type="button" aria-label="Switch colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <div class="hero">
+    <div>
+      <span class="avail"><span class="dot" aria-hidden="true"></span>Open to Android &amp; FinTech roles</span>
+      <h1>I build Android apps that take <em>real payments</em> on real hardware.</h1>
+      <p class="lede">Android developer in Mumbai with 3+ years across POS terminals, FinTech and enterprise apps. Kotlin and Java, card and UPI payments, biometric devices, printers and scales, running on locked-down Android fleets.</p>
+      <div class="cta">
+        <a class="btn primary" href="#apps">View my apps</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/shivam020801" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.56-2.3 3.2V21H9z"/></svg>
+          LinkedIn</a>
+      </div>
+    </div>
+
+    <aside class="receipt" aria-label="Profile summary styled as a payment receipt">
+      <div class="head"><b>SHIVAM RANA</b>ANDROID · FINTECH · POS</div>
+      <div class="row"><span>MTI</span><span>0210</span></div>
+      <div class="row"><span>PLATFORM</span><span>Android</span></div>
+      <div class="row"><span>LANG</span><span>Kotlin / Java</span></div>
+      <div class="row"><span>ARCH</span><span>MVVM · Clean</span></div>
+      <div class="row"><span>PAYMENTS</span><span>EMV · UPI · ISO 8583</span></div>
+      <div class="row"><span>DEVICES</span><span>RD · NFC · RS232</span></div>
+      <div class="row"><span>EXP</span><span>3+ yrs</span></div>
+      <div class="row"><span>LOC</span><span>Mumbai, IN</span></div>
+      <div class="status"><b>APPROVED</b><small>RESP CODE 00 · OPEN TO ROLES</small></div>
+    </aside>
+  </div>
+
+  <div class="stats" aria-label="Highlights">
+    <div class="stat"><b>3+</b><span>years building Android apps</span></div>
+    <div class="stat"><b>4</b><span>apps &amp; libraries shipped</span></div>
+    <div class="stat"><b>500</b><span>employees on a CRM I migrated to Kotlin</span></div>
+    <div class="stat"><b>3</b><span>payment modes: card, UPI, cash</span></div>
+  </div>
+
+  <section id="apps">
+    <div class="sec-head">
+      <h2>Mobile apps I've built</h2>
+      <p>From payment terminals in ration shops to field-force CRMs and real-time chat.</p>
+    </div>
+
+    <div class="apps">
+      <!-- POS -->
+      <article class="app app-pos">
+        <div class="stage">
+          <div class="phone" aria-hidden="true"><div class="screen">
+            <div class="sb"><span>9:41</span><span>4G ▮▮▮</span></div>
+            <div class="bar">Collect payment <small>TID 0042</small></div>
+            <div class="body">
+              <span class="m-label">Amount due</span>
+              <span class="amount">₹ 245.00</span>
+              <div class="tapzone"><div><div class="nfc"></div><div style="margin-top:6px">Tap, insert or swipe card</div></div></div>
+              <div class="paybtns"><span class="on">Card</span><span>UPI</span><span>Cash</span></div>
+            </div>
+          </div></div>
+        </div>
+        <div class="app-copy">
+          <span class="label">POS terminal app · FinTech</span>
+          <h3>Ration distribution POS</h3>
+          <p>An Android app for Public Distribution System ration shops, running on dedicated POS terminals. It authenticates beneficiaries by fingerprint, weighs stock and collects payment in one flow.</p>
+          <ul class="feats">
+            <li>EMV chip, contactless &amp; swipe</li>
+            <li>UPI and cash collection</li>
+            <li>Reversal &amp; revalidation flows</li>
+            <li>Fingerprint auth via RD service</li>
+            <li>USB / Bluetooth weighing scales</li>
+            <li>Receive-stock with shortage review</li>
+          </ul>
+          <div class="tags"><span class="tag">Kotlin</span><span class="tag">ISO 8583</span><span class="tag">EMV</span><span class="tag">UPI</span><span class="tag">MVVM</span><span class="tag">Android Enterprise</span></div>
+        </div>
+      </article>
+
+      <!-- CRM -->
+      <article class="app app-crm">
+        <div class="stage">
+          <div class="phone" aria-hidden="true"><div class="screen">
+            <div class="sb"><span>9:41</span><span>4G ▮▮▮</span></div>
+            <div class="bar">Attendance <small>Today</small></div>
+            <div class="body">
+              <div class="mapbox"><div class="fence"></div><div class="pin"></div></div>
+              <span class="m-label">Inside office geofence</span>
+              <div class="bigbtn">Check in with face</div>
+              <div>
+                <div class="li"><span>Visit · Andheri store</span><span class="chip">Done</span></div>
+                <div class="li"><span>Order #1182</span><span class="chip warn">Pending</span></div>
+                <div class="li"><span>Payment reminder</span><span class="chip">Sent</span></div>
+              </div>
+            </div>
+          </div></div>
+        </div>
+        <div class="app-copy">
+          <span class="label">Enterprise CRM · Play Store</span>
+          <h3>Field-force CRM</h3>
+          <p>A CRM used by 500 employees. I migrated it from legacy Java to Kotlin, then built out attendance, tracking, sales and reporting modules for teams in the field.</p>
+          <ul class="feats">
+            <li>Geo-verified attendance</li>
+            <li>Face verification (Regula SDK)</li>
+            <li>Route &amp; employee tracking</li>
+            <li>Orders, inventory &amp; ledgers</li>
+            <li>Analytics dashboards &amp; PDFs</li>
+            <li>Background sync with WorkManager</li>
+          </ul>
+          <div class="tags"><span class="tag">Kotlin</span><span class="tag">Maps SDK</span><span class="tag">Geofencing</span><span class="tag">MPAndroidChart</span><span class="tag">Firebase</span></div>
+        </div>
+      </article>
+
+      <!-- Chat -->
+      <article class="app app-chat">
+        <div class="stage">
+          <div class="phone" aria-hidden="true"><div class="screen">
+            <div class="sb"><span>9:41</span><span>4G ▮▮▮</span></div>
+            <div class="bar">Weekend Trek <small>12 members</small></div>
+            <div class="body" style="justify-content:flex-end">
+              <span class="who">Riya</span>
+              <div class="bubble in">Who's bringing the tents?</div>
+              <div class="bubble out">I've got two. Sharing the route now.</div>
+              <div class="bubble out img"></div>
+              <span class="who">Arjun</span>
+              <div class="bubble in">Perfect, see you at 6 🙌</div>
+            </div>
+            <div class="composer"><span>Message</span><span>➤</span></div>
+          </div></div>
+        </div>
+        <div class="app-copy">
+          <span class="label">Real-time chat · Freelance</span>
+          <h3>WeMemberz</h3>
+          <p>A group chat app built for a client on Firebase, with instant messaging, media sharing and push notifications that arrive even when the app is closed.</p>
+          <ul class="feats">
+            <li>Real-time group messaging</li>
+            <li>Group creation &amp; members</li>
+            <li>Image &amp; media sharing</li>
+            <li>FCM push notifications</li>
+          </ul>
+          <div class="tags"><span class="tag">Kotlin</span><span class="tag">Firebase RTDB</span><span class="tag">FCM</span><span class="tag">Retrofit</span></div>
+        </div>
+      </article>
+
+      <!-- Ads SDK -->
+      <article class="app app-sdk">
+        <div class="stage">
+          <div class="phone" aria-hidden="true"><div class="screen">
+            <div class="sb"><span>9:41</span><span>4G ▮▮▮</span></div>
+            <div class="bar">SDK Demo <small>v1.0</small></div>
+            <div class="body">
+              <span class="m-label">Banner slot</span>
+              <div class="adslot"><span class="m-label">Sponsored</span><b>Festive offer: 20% off</b></div>
+              <div class="bigbtn">Load campaign ad</div>
+              <div class="log"><i>✓</i> init ok<br><i>✓</i> campaign fetched<br><i>✓</i> ad rendered · 312 ms</div>
+            </div>
+          </div></div>
+        </div>
+        <div class="app-copy">
+          <span class="label">Android library · SDK</span>
+          <h3>Campaign Ads SDK</h3>
+          <p>A reusable SDK that host apps drop in to load and display campaign ads with minimal setup. A companion demo app triggers ad loads and tests the integration end to end.</p>
+          <ul class="feats">
+            <li>Standalone library module</li>
+            <li>Simple host-app integration</li>
+            <li>Demo app for testing</li>
+            <li>Ad loading &amp; rendering</li>
+          </ul>
+          <div class="tags"><span class="tag">Android SDK</span><span class="tag">Library design</span><span class="tag">Kotlin</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="sec-head"><h2>What I'm good at</h2><p>The problems I solve most often.</p></div>
+    <div class="caps">
+      <div class="cap"><span class="de">PAYMENTS</span><h3>Card, UPI and cash flows</h3><p>EMV chip, contactless and swipe over ISO 8583, with UPI and cash, plus reversal and revalidation when the host and terminal disagree.</p></div>
+      <div class="cap"><span class="de">HARDWARE</span><h3>Device integration</h3><p>Biometric RD services, USB and Bluetooth scales, thermal printers, NFC and RS232 peripherals.</p></div>
+      <div class="cap"><span class="de">ENTERPRISE</span><h3>Android Enterprise</h3><p>Device Owner, kiosk mode, MDM, remote management and diagnostics for field device fleets.</p></div>
+      <div class="cap"><span class="de">SECURITY</span><h3>Secure by default</h3><p>Android Keystore, SSL pinning, AES encryption and JWT authentication for apps that move money.</p></div>
+      <div class="cap"><span class="de">ARCHITECTURE</span><h3>Maintainable code</h3><p>MVVM and Clean Architecture with Coroutines, Flow, Room, WorkManager and Retrofit.</p></div>
+      <div class="cap"><span class="de">DELIVERY</span><h3>Shipping to production</h3><p>Play Store releases, APK/AAB builds, Crashlytics, performance monitoring and production support.</p></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><h2>Experience</h2><p>Most recent first.</p></div>
+    <div class="jobs">
+      <article class="job">
+        <div class="when">Mar 2025 – Aug 2026<br>Mumbai · On-site</div>
+        <div>
+          <h3>Android Developer (POS &amp; FinTech)</h3>
+          <p class="org">NeoSOFT · Full-time</p>
+          <ul>
+            <li>Built enterprise Android apps for POS terminals supporting secure payments and PDS operations.</li>
+            <li>Implemented payment workflows with ISO 8583, EMV and UPI, secured with AES, SSL pinning, Keystore and JWT.</li>
+            <li>Delivered Android Enterprise setups: Device Owner, kiosk mode, MDM and remote diagnostics.</li>
+            <li>Integrated Bluetooth, USB, RS232 and NFC devices, thermal printers and biometric readers.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="job">
+        <div class="when">Feb 2024 – Jan 2025<br>Noida · On-site</div>
+        <div>
+          <h3>Android Developer</h3>
+          <p class="org">7System Technology Pvt Ltd · Full-time</p>
+          <ul>
+            <li>Migrated a legacy Java CRM used by 500 employees to Kotlin.</li>
+            <li>Built attendance, tracking, task, inventory, order, ledger and sales analytics modules.</li>
+            <li>Implemented geo-verified attendance with Maps SDK, Geofencing and FusedLocationProvider.</li>
+            <li>Integrated Regula Face SDK and managed Play Store releases.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="job">
+        <div class="when">Aug 2022 – Feb 2023<br>Remote</div>
+        <div>
+          <h3>Freelance Android Developer</h3>
+          <p class="org">CQLsys Technologies · Freelance</p>
+          <ul>
+            <li>Built WeMemberz, a real-time group chat app on Kotlin, Firebase Realtime Database and FCM.</li>
+            <li>Implemented group creation, media sharing, push notifications and background sync.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><h2>Toolkit</h2><p>What I use day to day.</p></div>
+    <div class="skills">
+      <div class="skillset"><span class="label">Languages</span><ul><li>Kotlin</li><li>Java</li></ul></div>
+      <div class="skillset"><span class="label">Android</span><ul><li>Jetpack</li><li>Coroutines</li><li>Flow</li><li>Room</li><li>WorkManager</li><li>Retrofit</li><li>OkHttp</li></ul></div>
+      <div class="skillset"><span class="label">Payments &amp; security</span><ul><li>ISO 8583</li><li>EMV</li><li>UPI</li><li>Keystore</li><li>SSL pinning</li><li>AES</li><li>JWT</li></ul></div>
+      <div class="skillset"><span class="label">Devices &amp; platform</span><ul><li>Android Enterprise</li><li>MDM</li><li>Bluetooth</li><li>USB</li><li>NFC</li><li>RS232</li><li>Firebase</li></ul></div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-top:0">
+    <div class="contact">
+      <div>
+        <span class="label">Contact</span>
+        <h2 style="margin-top:12px">Building an Android or payments product? Send me your requirements.</h2>
+        <p>Hiring for a role or need an app built? Tell me what you need and I'll reply by email, usually within a day.</p>
+        <div class="direct">
+          <span>Or email me directly</span>
+          <div class="mailrow"><code id="mailAddr">ranashivam338@gmail.com</code><button type="button" id="copyMail" class="copy">Copy</button></div>
+          <a href="https://www.linkedin.com/in/shivam020801" target="_blank" rel="noopener">Message me on LinkedIn →</a>
+        </div>
+      </div>
+      <form id="reqForm" class="reqform" novalidate>
+        <input type="hidden" name="access_key" value="77585ff2-b6f2-454e-84a0-1835677c49f1">
+        <input type="hidden" name="subject" value="New requirement from your portfolio">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="two">
+          <label for="f-name">Your name<input id="f-name" name="name" required autocomplete="name"></label>
+          <label for="f-email">Email<input id="f-email" name="email" type="email" required autocomplete="email"></label>
+        </div>
+        <div class="two">
+          <label for="f-company">Company <em>(optional)</em><input id="f-company" name="company" autocomplete="organization"></label>
+          <label for="f-type">I'm looking for<select id="f-type" name="type"><option>Full-time Android role</option><option>Freelance / contract app</option><option>POS or payments integration</option><option>Something else</option></select></label>
+        </div>
+        <label for="f-msg">Requirements<textarea id="f-msg" name="message" rows="5" required placeholder="What do you need built, timeline, budget or role details"></textarea></label>
+        <button type="submit" class="btn send" id="sendBtn">Send requirements</button>
+        <p class="formmsg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer><span>© 2026 Shivam Rana</span><span>Android Developer · Mumbai, India</span></footer>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
+  function current(){var t=root.getAttribute('data-theme');if(t)return t;return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function label(){btn.textContent=current()==='dark'?'Light':'Dark';}
+  try{var s=localStorage.getItem('sr-theme');if(s)root.setAttribute('data-theme',s);}catch(e){}
+  label();
+  btn.addEventListener('click',function(){var n=current()==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('sr-theme',n);}catch(e){}label();});
+})();
+(function(){
+  var addr=document.getElementById('mailAddr'), cp=document.getElementById('copyMail');
+  function selectAddr(){var r=document.createRange();r.selectNodeContents(addr);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+  cp.addEventListener('click',function(){
+    var t=addr.textContent;
+    try{navigator.clipboard.writeText(t).then(function(){cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy'},1800)},function(){selectAddr();cp.textContent='Press Ctrl+C';});}
+    catch(e){selectAddr();cp.textContent='Press Ctrl+C';}
+  });
+  var f=document.getElementById('reqForm'), msg=document.getElementById('formMsg'), send=document.getElementById('sendBtn');
+  function say(t,c){msg.textContent=t;msg.className='formmsg'+(c?' '+c:'');}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!f.checkValidity()){say('Please fill in your name, a valid email and your requirements.','err');return;}
+    var key=f.access_key.value;
+    if(!key||key.indexOf('YOUR_')===0){say('The form isn\'t connected yet. Please email me at ranashivam338@gmail.com instead.','err');return;}
+    send.disabled=true;send.textContent='Sending…';say('');
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      .then(function(r){return r.json();})
+      .then(function(j){if(j&&j.success){f.reset();say('Thanks! Your requirements were sent. I\'ll reply by email soon.','ok');}else{throw new Error();}})
+      .catch(function(){say('Sending failed. Please email me at ranashivam338@gmail.com instead.','err');})
+      .then(function(){send.disabled=false;send.textContent='Send requirements';});
+  });
+})();
+</script>
